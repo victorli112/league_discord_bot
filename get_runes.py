@@ -49,7 +49,14 @@ runePages = [
         "shard_3": "",
     },
 ]
-def get_runes(soup):
+
+"""
+INPUT: the soup object containing all information about champion runes
+OUTPUT: a dictionary consisting of all the runes that is recommended.
+            NOTE: there are 4 sets of runes
+DESCRIPTION: get the recommended runes of the champion
+"""
+def get_runes(soup) -> dict:
     # runes = soup.find_all('div', class_ = "_3goykt _hmag7l tooltipped")
     allRunes = soup.find_all('image', class_ = "lozad")
     runes = allRunes[8 : ]
@@ -58,6 +65,7 @@ def get_runes(soup):
         for x,y in page.items():
             page[x] = runes[i]['data-xlink-href']
             i += 1
+    return runePages
     
     # for page in runePages:
     #     print(page)

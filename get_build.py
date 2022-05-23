@@ -5,9 +5,9 @@ import requests
 INPUT: the soup object containing all information about champion build
 OUTPUT: a dictionary consisting of all the items that is recommended.
             NOTE: item_6 is the ward, item_7 is the elixir. The other items are listed chronologically.
-DESCRIPTION: get the recommended build of the champion in the role
+DESCRIPTION: get the recommended build of the champion
 """
-def get_build(blocks):
+def get_build(blocks) -> dict:
     items = {}
     counter = 0
 
@@ -16,7 +16,7 @@ def get_build(blocks):
         item = img['alt']
         items[f'item_{counter}'] = item
         counter += 1
-    print(items)
+    return items
 
 
 def get_build1(champion_name: str, role: str) -> dict:
