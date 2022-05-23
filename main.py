@@ -2,18 +2,15 @@ import requests
 from bs4 import BeautifulSoup
 
 import get_runes
-def main():
-    URL = "https://www.metasrc.com/5v5/champion/lucian/adc"
+def main(champion_name: str, role: str):
+    URL = f"https://www.metasrc.com/5v5/champion/{champion_name}/{role}"
     page = requests.get(URL)
 
     soup = BeautifulSoup(page.content, "html.parser")
 
     search = ["Summoner Spells", "Starting Items", "Runes", "Item Build", "Skill Order"]
     def matchSearch(text, search):
-        if any(x in text for x in search):
-            return True
-        else:
-            return False
+        return any(x in text for x in search)
 
     blocks = soup.find_all('div', class_ = "_yq1p7n")
     refined = []
@@ -30,4 +27,4 @@ def main():
     get_runes.get_runes(runes)
 
 if __name__ == "__main__":
-    main()
+    main("lucian", "adc")
