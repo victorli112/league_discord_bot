@@ -18,10 +18,7 @@ def get_blocks(champion_name: str, role: str):
             f"Best {champion_name} Item Build",
             f"Best {champion_name} Skill Order"]
     def matchSearch(text, search):
-        for i in search:
-            if i == text:
-                return True
-        return False
+        return any(x in text for x in search)
 
     blocks = soup.find_all('div', class_ = "_yq1p7n")
     refined = []
@@ -29,16 +26,17 @@ def get_blocks(champion_name: str, role: str):
         # print(block.contents[0].text)
         # print(matchSearch(block.contents[0].text, search))
         if(matchSearch(block.contents[0].text, search)):
-            print("haha")
             refined.append(block)
+            #print(block.contents[0].text)
 
     summoners = refined[0]
     starting = refined[1]
     runes = refined[2]
     build = refined[3]
-    return blocks
-    #get_runes.get_runes(runes)
+    return refined
+
     #print(get_build(champion_name, role))
 
 if __name__ == "__main__":
     blocks = get_blocks("Lucian", "adc")
+    get_build(blocks[3])
