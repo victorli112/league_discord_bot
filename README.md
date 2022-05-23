@@ -8,3 +8,4 @@ Github Branching and Merging
 5. Push the changes: `git push --set-upstream origin <branch_name>`
 6. After pushing your changes to your branch, go on the github website and you should be able to create a pull request in the Pull Request tab on the website
 7. Ask for a code review, then merge when finished
+8. Swap back to the main branch on your local machine: `git checkout main`
