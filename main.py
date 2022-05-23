@@ -1,16 +1,27 @@
+from numpy import true_divide
 import requests
+
 from bs4 import BeautifulSoup
 
-import get_runes
-def main(champion_name: str, role: str):
-    URL = f"https://www.metasrc.com/5v5/champion/{champion_name}/{role}"
+from get_build import get_build
+from get_runes import get_runes
+
+def get_blocks(champion_name: str, role: str):
+    URL = f"https://www.metasrc.com/5v5/champion/lucian/{role}"
     page = requests.get(URL)
 
     soup = BeautifulSoup(page.content, "html.parser")
 
-    search = ["Summoner Spells", "Starting Items", "Runes", "Item Build", "Skill Order"]
+    search = [f"Best {champion_name} Summoner Spells",
+            f"Best {champion_name} Starting Items",
+            f"Best {champion_name} Runes",
+            f"Best {champion_name} Item Build",
+            f"Best {champion_name} Skill Order"]
     def matchSearch(text, search):
-        return any(x in text for x in search)
+        for i in search:
+            if i == text:
+                return True
+        return False
 
     blocks = soup.find_all('div', class_ = "_yq1p7n")
     refined = []
@@ -18,13 +29,16 @@ def main(champion_name: str, role: str):
         # print(block.contents[0].text)
         # print(matchSearch(block.contents[0].text, search))
         if(matchSearch(block.contents[0].text, search)):
+            print("haha")
             refined.append(block)
 
     summoners = refined[0]
     starting = refined[1]
     runes = refined[2]
-
-    get_runes.get_runes(runes)
+    build = refined[3]
+    return blocks
+    #get_runes.get_runes(runes)
+    #print(get_build(champion_name, role))
 
 if __name__ == "__main__":
-    main("lucian", "adc")
+    blocks = get_blocks("Lucian", "adc")
