@@ -13,8 +13,10 @@ def get_build(blocks) -> dict:
 
     for i in blocks.find_all('div', {'class' : ['_5lds7o-3 _82gy0d', '_5lds7o-1 _82gy0d']}):
         img = i.find('img')
-        item = img['alt']
-        items[f'item_{counter}'] = item
+        item_data = []
+        item_data.append(img['data-src'])
+        item_data.append(img['alt'])
+        items[f'item_{counter}'] = item_data
         counter += 1
     return items
 
