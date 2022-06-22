@@ -18,8 +18,12 @@ async def on_message(message):
     command = message.content 
     # initial command
     if command.startswith('8=D'):
-        champion = command.split('8=D')[1]
-        build = main(champion)
+        champion_and_role = command.split('8=D')[1]
+        champion_and_role = champion_and_role.split(" ")
+        if champion_and_role.size() == 1:
+            await message.channel.send("u dum dum do champ name and role")
+            return
+        build = main(champion_and_role[0], champion_and_role[1])
         await message.channel.send(random.choice(POKEMON))
         await message.channel.send(build)
         

@@ -5,7 +5,7 @@ from get_starting_items import get_starting_items
 from get_skills import get_skills
 from get_summoner_spells import get_summoner_spells
 
-def main(champion_name: str, role: str = ""):
+def main(champion_name: str, role: str):
     blocks = get_blocks(champion_name, role)
     runes = get_runes(blocks[2])
     build = get_build(blocks[3])
