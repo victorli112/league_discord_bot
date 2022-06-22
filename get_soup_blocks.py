@@ -8,7 +8,11 @@ OUTPUT: a list of soup objects partitioned by different aspects of a champion
 DESCRIPTION: return blocks of information for a champion in a role
 """
 def get_blocks(champion_name: str, role: str) -> list:
-    URL = f"https://www.metasrc.com/5v5/champion/{champion_name}/{role}"
+    if role == "":
+        URL = f"https://www.metasrc.com/5v5/champion/{champion_name}"
+    else:
+        URL = f"https://www.metasrc.com/5v5/champion/{champion_name}/{role}"
+        
     page = requests.get(URL)
 
     soup = BeautifulSoup(page.content, "html.parser")
