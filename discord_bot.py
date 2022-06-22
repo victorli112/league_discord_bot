@@ -20,7 +20,7 @@ async def on_message(message):
     if command.startswith('8=D'):
         champion_and_role = command.split('8=D')[1]
         champion_and_role = champion_and_role.split(" ")
-        if champion_and_role.size() == 1:
+        if len(champion_and_role) == 1:
             await message.channel.send("u dum dum do champ name and role")
             return
         build = main(champion_and_role[0], champion_and_role[1])
