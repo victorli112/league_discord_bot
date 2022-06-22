@@ -2,8 +2,9 @@
 
 import discord
 from main import main
+import os
 
-TOKEN = 'OTI2OTAyOTA3MzEwMzIxNzU2.GOTCAQ.ecOS_RvD5GfqCQs8cNkLbT7cQnQ7O2jUf9-kEE'
+TOKEN = os.getenv("DISCORD_TOKEN")
 
 
 client = discord.Client()
@@ -22,5 +23,5 @@ async def on_message(message):
         await message.channel.send(build)
         
 
-
-client.run(TOKEN)
+if __name__ == "__main__":
+    client.run(TOKEN)
