@@ -8,7 +8,6 @@ DESCRIPTION: get the recommended build of the champion
 """
 def get_skills(blocks) -> list:
     skills = [""] * 19
-    print(skills)
 
     # first find each row
     for i in blocks.find_all('tr', {'class' : ['_sbzxum']}):
