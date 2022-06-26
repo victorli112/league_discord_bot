@@ -2,7 +2,7 @@
 
 import discord
 import random
-from main import main
+from data_scrape.main import main
 import os
 
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -18,14 +18,15 @@ async def on_message(message):
     command = message.content 
     # initial command
     if command.startswith('8=D'):
-        try:
-            champion_and_role = command.split('8=D')[1]
-            champion_and_role = champion_and_role.split(" ")
-            build = main(champion_and_role[1].strip(), champion_and_role[2].strip())
-            await message.channel.send(random.choice(POKEMON))
-            await message.channel.send(build)
-        except:
-            await message.channel.send("u dum dum do champ name and role after a penis")
+        champion_and_role = command.split('8=D')[1]
+        champion_and_role = champion_and_role.split(" ")
+        if champion_and_role.size() == 1:
+            await message.channel.send("u dum dum do champ name and role")
+            return
+        build = main(champion_and_role[0], champion_and_role[1])
+        await message.channel.send(random.choice(POKEMON))
+        await message.channel.send(build)
+        
 
 if __name__ == "__main__":
     client.run(TOKEN)
