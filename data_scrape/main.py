@@ -13,3 +13,4 @@ def main(champion_name: str, role: str):
     starting_items = get_starting_items(blocks[1])
     skills = get_skills(blocks[4])
     return(build)
+print(main("lucian","adc"))
