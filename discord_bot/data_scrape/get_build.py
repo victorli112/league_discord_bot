@@ -19,20 +19,3 @@ def get_build(blocks) -> dict:
         items[f'item_{counter}'] = item_data
         counter += 1
     return items
-
-
-def get_build1(champion_name: str, role: str) -> dict:
-    url = f"https://www.metasrc.com/5v5/champion/{champion_name}/{role}"
-    req = requests.get(url=url)
-    soup = BeautifulSoup(req.content, 'html.parser')
-    
-    items ={}
-    counter = 0
-
-    for i in soup.find_all('div', {'class' : ['_5lds7o-3 _82gy0d', '_5lds7o-1 _82gy0d']}):
-        img = i.find('img')
-        item = img['alt']
-        items[f'item_{counter}'] = item
-        counter += 1
-
-    return items

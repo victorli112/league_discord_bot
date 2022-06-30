@@ -2,7 +2,7 @@
 
 import discord
 import random
-from data_scrape.main import main
+from data_scrape.get_information import get_information
 import os
 
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -23,10 +23,12 @@ async def on_message(message):
         if champion_and_role.size() == 1:
             await message.channel.send("u dum dum do champ name and role")
             return
-        build = main(champion_and_role[0], champion_and_role[1])
+        build = get_information(champion_and_role[0], champion_and_role[1])
         await message.channel.send(random.choice(POKEMON))
         await message.channel.send(build)
         
 
 if __name__ == "__main__":
-    client.run(TOKEN)
+    build = get_information("lucian","adc")
+    print(build)
+    #client.run(TOKEN)
