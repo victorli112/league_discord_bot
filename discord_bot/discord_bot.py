@@ -21,14 +21,30 @@ async def on_message(message):
         try: 
             champion_and_role = command.split('8=D')[1].strip()
             champion_and_role = champion_and_role.split(" ")
-            if len(champion_and_role) == 1:
-                build = get_information(champion_and_role[0])
-            else: 
-                 build = get_information(champion_and_role[0], champion_and_role[1])
+            champion = champion_and_role[0]
+
+            # role might not be specified
+            try:
+                role = champion_and_role[1]
+                build = get_information(champion, role)
+            except IndexError:
+                build = get_information(champion)
             await message.channel.send(random.choice(POKEMON))
             await message.channel.send(build)
         except Exception as err:
             await message.channel.send(f"u dum dum do champ name and role, {err}")
 
+async def embed(champion, role):
+    championUpper = champion.capitalize()
+    roleUpper = role.capitalize()
+    embedVar = discord.Embed(
+        title= championUpper + " " + roleUpper + " Build", 
+        #description = random.choice(POKEMON) + " whips out their huge throbbing cock, respectfully.",
+        url = f"https://u.gg/lol/champions/{champion}/build?role={role}",
+        color=discord.Color.blue(),
+    )
+    embedVar.set_thumbnail(url = f"https://static.u.gg/assets/lol/riot_static/12.12.1/img/champion/{championUpper}.webp")
+    return embedVar
+    
 if __name__ == "__main__":
     client.run(TOKEN)
