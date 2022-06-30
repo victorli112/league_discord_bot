@@ -29,6 +29,4 @@ async def on_message(message):
         
 
 if __name__ == "__main__":
-    build = get_information("lucian","adc")
-    print(build)
-    #client.run(TOKEN)
+    client.run(TOKEN)
