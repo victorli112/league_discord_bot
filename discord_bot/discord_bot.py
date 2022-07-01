@@ -2,6 +2,7 @@
 
 import discord
 import random
+from datetime import datetime
 from data_scrape.get_information import get_information
 from create_images.runes_image import create_rune_image
 
@@ -44,14 +45,16 @@ async def on_message(message):
             await message.channel.send(build.build)
 
             #First Embed - Title, Champion Thumbnail, Runes, Summoner Spells
+
             embedVar = embed(champion, role, build)
 
             runes = create_rune_image(build.runes)
             runes.save('runes.png')
             file = discord.File('runes.png', filename = "runes.png")
             embedVar.set_image(url = "attachment://runes.png")
-
+            print(f"start: {datetime.now()}")
             await message.channel.send(embed = embedVar, file = file)
+            print(f"end: {datetime.now()}")
         except Exception as err:
             await message.channel.send(f"u dum dum do champ name and role, {err}")
 
