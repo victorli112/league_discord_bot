@@ -3,11 +3,7 @@
 import discord
 import random
 from data_scrape.get_information import get_information
-import os
-from PIL import Image
-import requests
-from io import BytesIO
-import urllib.request
+from create_images.runes_image import create_rune_image
 
 #TOKEN = os.getenv('DISCORD_TOKEN')
 TOKEN = "OTI2OTAyOTA3MzEwMzIxNzU2.GWKn6K.yHOsE0Ga2wk6xsgM5q0l9Pm5IRufMXdIR7FcTc"
@@ -48,9 +44,9 @@ async def on_message(message):
             await message.channel.send(build.build)
 
             #First Embed - Title, Champion Thumbnail, Runes, Summoner Spells
-            embedVar = await embed(champion, role, build)
+            embedVar = embed(champion, role, build)
 
-            runes = await championSelectBuild(build.runes)
+            runes = create_rune_image(build.runes)
             runes.save('runes.png')
             file = discord.File('runes.png', filename = "runes.png")
             embedVar.set_image(url = "attachment://runes.png")
@@ -64,7 +60,7 @@ INPUT: Champion name, role, ResponseStruct object
 OUTPUT: Outputs a single embed for runes and summoner spells
 DESCRIPTION: Creates a discord embed for runes and summoner spells
 """
-async def embed(champion, role, build):
+def embed(champion, role, build):
     championUpper = champion.capitalize()
     roleUpper = role.capitalize()
 
@@ -77,49 +73,6 @@ async def embed(champion, role, build):
     embedVar.set_thumbnail(url = f"https://static.u.gg/assets/lol/riot_static/12.12.1/img/champion/{championUpper}.webp")
     embedVar.add_field(name = "Skill Order", value = ''.join(build.skills), inline = "False")
     return embedVar
-
-"""
-INPUT: Runes dictionary from ResponseStruct object
-OUTPUT: URL of combined image of all the rune urls from the dict
-DESCRIPTION: Converts urls to images with BytesIO. Combine images with Pillow. Combined image used for embed.
-"""
-async def championSelectBuild(runes):
-    #Convert image urls to readable image files
-    # response = requests.get(runes['keystone'])
-    # img1 = Image.open(BytesIO(response.content))
-    link = runes['keystone']
-    urllib.request.urlretrieve(link, "rune.png")
-    img1 = Image.open("rune.png").convert('RGBA')
-    width = img1.width
-    height = img1.height
-
-    response = requests.get(runes['main_tree1'])
-    img2 = Image.open(BytesIO(response.content))
-    #Combine shit. Runes 64 x 64. Shards 32 x 32
-    big = Image.new('RGBA', ((4 * width), (4 * height)))
-    big.paste(img1, (0, 0))
-    big.paste(img2, (0, img1.width))
-
-    return transparentify(big)
-
-"""
-INPUT: Image object
-OUTPUT: Transparent image object
-DESCRIPTION: Converts image object to RGBA tuple values. Creates a new list of pixel tuples by replacing black ones with transparent ones. Replaces original pixel tuples with new list.
-"""
-
-def transparentify(image):
-    rgba = image.convert("RGBA")
-    datas = rgba.getdata()
-    newData = []
-    for item in datas:
-        if item[0] == 0 and item[1] == 0 and item[2] == 0:  # finding black colour by its RGB value (0,0,0). If black found, append transparent (255,255,255)
-            newData.append((255, 255, 255, 0))
-        else:
-            newData.append(item)  # other colours remain unchanged
-    
-    image.putdata(newData)
-    return image
 
 if __name__ == "__main__":
     client.run(TOKEN)
