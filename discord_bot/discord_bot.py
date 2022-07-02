@@ -50,10 +50,10 @@ async def on_message(message):
             #First Embed - Title, Champion Thumbnail, Runes, Summoner Spells
             embedVar = await embed(champion, role, build)
 
-            runes = await championSelectBuild(build.runes)
-            runes.save('runes.png')
-            file = discord.File('runes.png', filename = "runes.png")
-            embedVar.set_image(url = "attachment://runes.png")
+            champSelect = await championSelectBuild(build.runes)
+            champSelect.save('champSelect.png')
+            file = discord.File('champSelect.png', filename = "champSelect.png")
+            embedVar.set_image(url = "attachment://champSelect.png")
 
             await message.channel.send(embed = embedVar, file = file)
         except Exception as err:
@@ -85,18 +85,16 @@ DESCRIPTION: Converts urls to images with BytesIO. Combine images with Pillow. C
 """
 async def championSelectBuild(runes):
     #Convert image urls to readable image files
-    # response = requests.get(runes['keystone'])
-    # img1 = Image.open(BytesIO(response.content))
     link = runes['keystone']
-    urllib.request.urlretrieve(link, "rune.png")
-    img1 = Image.open("rune.png").convert('RGBA')
+    urllib.request.urlretrieve(link, "temp.png")
+    img1 = Image.open("temp.png").convert('RGBA')
     width = img1.width
     height = img1.height
 
     response = requests.get(runes['main_tree1'])
     img2 = Image.open(BytesIO(response.content))
     #Combine shit. Runes 64 x 64. Shards 32 x 32
-    big = Image.new('RGBA', ((4 * width), (4 * height)))
+    big = Image.new('RGBA', ((6 * width), (4 * height)))
     big.paste(img1, (0, 0))
     big.paste(img2, (0, img1.width))
 
