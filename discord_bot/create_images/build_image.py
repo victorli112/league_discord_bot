@@ -1,6 +1,5 @@
 from PIL import Image
-import requests
-from io import BytesIO
+from .crop_image import crop_image
 
 """
 INPUT: List of list of build item dictionaries
@@ -25,13 +24,3 @@ def create_build_image(build_list) -> Image:
             width += 48
             height = 0
     return final_image
-
-def crop_image(image_info):
-    response = requests.get(image_info['sheet'])
-    sheet_image = Image.open(BytesIO(response.content))
-    width = image_info['position'][0]
-    height = image_info['position'][1]
-    area = (width, height, (width + 48), (height + 48))
-    build_item = sheet_image.crop(area)
-    sheet_image.close()
-    return build_item
