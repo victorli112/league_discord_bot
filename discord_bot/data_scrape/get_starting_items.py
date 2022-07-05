@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-import requests
 
 """
 INPUT: the soup object containing all information about champion starting items

@@ -11,6 +11,9 @@ DESCRIPTION: return blocks of information for a champion in a role
           2 - skill path
           3 - starting items
           4 - first three items
+          5 - fourth item options
+          6 - fifth item options
+          7 - sixth item options
 """
 def get_blocks(champion_name: str, role: str ="") -> list:
     if role == "":
@@ -25,8 +28,11 @@ def get_blocks(champion_name: str, role: str ="") -> list:
         'content-section_content summoner-spells',
         'content-section_content skill-path-block',
         'content-section_content starting-items',
-        'content-section_content core-items mythic-border-container'
+        'content-section_content core-items mythic-border-container',
+        'content-section_content item-options item-options-1',
+        'content-section_content item-options item-options-2',
+        'content-section_content item-options item-options-3'
     ]
 
     blocks = soup.find_all(True, {'class':classes})
-    return blocks[:5]
+    return blocks[:8]
