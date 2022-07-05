@@ -58,7 +58,7 @@ async def on_message(message):
             summoners.save("summoners.png")
 
             # combine all the images into one
-            final_image = build_final_image(['runes.png', 'starting_items.png', 'build.png', 'summoners.png'])
+            final_image = build_final_image(['runes.png', 'starting_items.png', 'summoners.png', 'build.png'])
             final_image.save('final_image.png')
 
             file = discord.File("final_image.png", filename = "final_image.png")
