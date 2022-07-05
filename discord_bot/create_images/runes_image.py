@@ -9,7 +9,7 @@ OUTPUT: URL of combined image of all the rune urls from the dict
 DESCRIPTION: Converts urls to images with BytesIO. Combine images with Pillow. Combined image used for embed.
 """
 def create_rune_image(runes) -> Image:
-    final_image = Image.new('RGBA', (400, 400))
+    final_image = Image.new('RGBA', (400, 128))
     row1_width = 0
     row2_width = 0
     row2_starting_height = 0

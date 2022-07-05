@@ -7,6 +7,7 @@ from data_scrape.get_information import get_information
 from create_images.runes_image import create_rune_image
 from create_images.starting_items_image import create_starting_items_image
 from create_images.build_image import create_build_image
+from create_images.final_image import build_final_image
 
 #TOKEN = os.getenv('DISCORD_TOKEN')
 TOKEN = "OTI2OTAyOTA3MzEwMzIxNzU2.GWKn6K.yHOsE0Ga2wk6xsgM5q0l9Pm5IRufMXdIR7FcTc"
@@ -40,30 +41,24 @@ async def on_message(message):
             except IndexError:
                 build = get_information(champion)
 
-            await message.channel.send(build.runes) #{'keystone': '', 'main_tree1': ''
-            await message.channel.send(build.summoners) #[spell1, spell2]
-            await message.channel.send(build.skills)    #['q','w','e',...]
-            await message.channel.send(build.starting_items)
-            await message.channel.send(build.build)
-
             #First Embed - Title, Champion Thumbnail, Runes, Summoner Spells
-
             embedVar = embed(champion, role, build)
 
-            # runes = create_rune_image(build.runes)
-            # runes.save('runes.png')
-            # file = discord.File('runes.png', filename = "runes.png")
-            # embedVar.set_image(url = "attachment://runes.png")
+            runes = create_rune_image(build.runes)
+            runes.save('runes.png')
 
-            # starting_items = create_starting_items_image(build.starting_items)
-            # starting_items.save("starting_items.png")
-            # file = discord.File("starting_items.png", filename = "starting_items.png")
-            # embedVar.set_image(url = "attachment://starting_items.png")
+            starting_items = create_starting_items_image(build.starting_items)
+            starting_items.save("starting_items.png")
 
             build = create_build_image(build.build)
             build.save("build.png")
-            file = discord.File("build.png", filename = "build.png")
-            embedVar.set_image(url = "attachment://build.png")
+
+            # combine all the images into one
+            final_image = build_final_image(['runes.png', 'starting_items.png', 'build.png'])
+            final_image.save('final_image.png')
+
+            file = discord.File("final_image.png", filename = "final_image.png")
+            embedVar.set_image(url = "attachment://final_image.png")
             
             print(f"start: {datetime.now()}")
             await message.channel.send(embed = embedVar, file = file)
