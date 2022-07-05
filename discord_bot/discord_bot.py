@@ -8,6 +8,7 @@ from create_images.runes_image import create_rune_image
 from create_images.starting_items_image import create_starting_items_image
 from create_images.build_image import create_build_image
 from create_images.final_image import build_final_image
+from create_images.summoner_spells_image import create_summoner_spells_image
 
 #TOKEN = os.getenv('DISCORD_TOKEN')
 TOKEN = "OTI2OTAyOTA3MzEwMzIxNzU2.GWKn6K.yHOsE0Ga2wk6xsgM5q0l9Pm5IRufMXdIR7FcTc"
@@ -53,8 +54,11 @@ async def on_message(message):
             build = create_build_image(build.build)
             build.save("build.png")
 
+            summoners = create_summoner_spells_image(build.summoners)
+            summoners.save("summoners.png")
+
             # combine all the images into one
-            final_image = build_final_image(['runes.png', 'starting_items.png', 'build.png'])
+            final_image = build_final_image(['runes.png', 'starting_items.png', 'build.png', 'summoners.png'])
             final_image.save('final_image.png')
 
             file = discord.File("final_image.png", filename = "final_image.png")
