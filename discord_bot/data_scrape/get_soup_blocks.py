@@ -26,6 +26,7 @@ def get_blocks(champion_name: str, role: str ="") -> list:
     classes = [
         'content-section_content recommended-build_runes',
         'content-section_content summoner-spells',
+        'content-section_content skill-priority',
         'content-section_content skill-path-block',
         'content-section_content starting-items',
         'content-section_content core-items mythic-border-container',
@@ -35,4 +36,4 @@ def get_blocks(champion_name: str, role: str ="") -> list:
     ]
 
     blocks = soup.find_all(True, {'class':classes})
-    return blocks[:8]
+    return blocks[:9]

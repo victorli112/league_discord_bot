@@ -3,6 +3,7 @@
 import discord
 import random
 from datetime import datetime
+from create_images.skill_priority_image import create_skill_priority_image
 from data_scrape.get_information import get_information
 from create_images.runes_image import create_rune_image
 from create_images.starting_items_image import create_starting_items_image
@@ -48,11 +49,14 @@ async def on_message(message):
             runes = create_rune_image(build.runes)
             runes.save('runes.png')
 
+            skill_priority = create_skill_priority_image(build.skill_priority)
+            skill_priority.save('skill_priority.png')
+
             starting_items = create_starting_items_image(build.starting_items)
             starting_items.save("starting_items.png")
 
-            build = create_build_image(build.build)
-            build.save("build.png")
+            final_build = create_build_image(build.build)
+            final_build.save("final_build.png")
 
             summoners = create_summoner_spells_image(build.summoners)
             summoners.save("summoners.png")
