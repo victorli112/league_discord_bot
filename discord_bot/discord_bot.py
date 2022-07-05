@@ -51,14 +51,14 @@ async def on_message(message):
             starting_items = create_starting_items_image(build.starting_items)
             starting_items.save("starting_items.png")
 
-            build = create_build_image(build.build)
-            build.save("build.png")
+            final_build = create_build_image(build.build)
+            final_build.save("build.png")
 
             summoners = create_summoner_spells_image(build.summoners)
             summoners.save("summoners.png")
 
             # combine all the images into one
-            final_image = build_final_image(['runes.png', 'starting_items.png', 'summoners.png', 'build.png'])
+            final_image = build_final_image(['runes.png', 'starting_items.png', 'build.png', 'summoners.png'])
             final_image.save('final_image.png')
 
             file = discord.File("final_image.png", filename = "final_image.png")
