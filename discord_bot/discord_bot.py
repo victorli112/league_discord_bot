@@ -5,6 +5,7 @@ import random
 from datetime import datetime
 from data_scrape.get_information import get_information
 from create_images.runes_image import create_rune_image
+from create_images.starting_items_image import create_starting_items_image
 
 #TOKEN = os.getenv('DISCORD_TOKEN')
 TOKEN = "OTI2OTAyOTA3MzEwMzIxNzU2.GWKn6K.yHOsE0Ga2wk6xsgM5q0l9Pm5IRufMXdIR7FcTc"
@@ -48,10 +49,14 @@ async def on_message(message):
 
             embedVar = embed(champion, role, build)
 
-            runes = create_rune_image(build.runes)
-            runes.save('runes.png')
-            file = discord.File('runes.png', filename = "runes.png")
-            embedVar.set_image(url = "attachment://runes.png")
+            # runes = create_rune_image(build.runes)
+            # runes.save('runes.png')
+            # file = discord.File('runes.png', filename = "runes.png")
+            # embedVar.set_image(url = "attachment://runes.png")
+            starting_items = create_starting_items_image(build.starting_items)
+            starting_items.save("starting_items.png")
+            file = discord.File("starting_items.png", filename = "starting_items.png")
+            embedVar.set_image(url = "attachment://starting_items.png")
             print(f"start: {datetime.now()}")
             await message.channel.send(embed = embedVar, file = file)
             print(f"end: {datetime.now()}")
