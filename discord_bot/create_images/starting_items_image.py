@@ -1,6 +1,5 @@
 from PIL import Image
 import requests
-import math
 from io import BytesIO
 
 """

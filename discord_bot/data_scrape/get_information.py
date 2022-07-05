@@ -19,6 +19,6 @@ def get_information(champion_name: str, role: str=""):
     summoners = get_summoner_spells(blocks[1])
     skills = get_skills(blocks[2])
     starting_items = get_starting_items(blocks[3])
-    build = get_build(blocks[4])
+    build = get_build(blocks[4], blocks[5], blocks[6], blocks[7])
     response = ResponseStruct(runes, summoners, skills, starting_items, build)
     return(response)
