@@ -1,9 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
+from utils import get_link
 
 """
 INPUT: champion name: the name of the champion, has to be all lowercase
-        role: the role of the champion, has to be all lowercase
+        role: the role of the champion, has to be all lowercase, could be empty
 OUTPUT: a list of soup objects partitioned by different aspects of a champion
 DESCRIPTION: return blocks of information for a champion in a role
     NOTE: 0 - runes
@@ -16,11 +17,8 @@ DESCRIPTION: return blocks of information for a champion in a role
           7 - sixth item options
 """
 def get_blocks(champion_name: str, role: str ="") -> list:
-    if role == "":
-        URL = f"https://u.gg/lol/champions/{champion_name}/build"
-    else:
-        URL = f"https://u.gg/lol/champions/{champion_name}/build?role={role}"
-        
+    URL = get_link(champion_name, role)
+
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, "html.parser")
     classes = [
