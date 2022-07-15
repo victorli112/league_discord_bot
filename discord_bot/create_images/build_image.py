@@ -8,7 +8,7 @@ DESCRIPTION: Crops items from item sheet with Pillow, given positions. Combines 
 """
 
 def create_build_image(build_list: list[list]) -> Image:
-    final_image = Image.new('RGBA', (48 * 6, 48 * 3))
+    final_image = Image.new('RGBA', (64 * 6, 64 * 3))
     width = 0
     height = 0
     for slot_options in build_list:
@@ -21,6 +21,6 @@ def create_build_image(build_list: list[list]) -> Image:
             for image in images:
                 final_image.paste(image, (width, height))
                 height += image.height
-            width += 48
+            width += 64
             height = 0
     return final_image

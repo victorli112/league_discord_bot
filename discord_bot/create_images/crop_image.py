@@ -9,5 +9,6 @@ def crop_image(image_info):
     height = image_info['position'][1]
     area = (width, height, (width + 48), (height + 48))
     starting_item = sheet_image.crop(area)
+    starting_item = starting_item.resize((64, 64))
     sheet_image.close()
     return starting_item
