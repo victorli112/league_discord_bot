@@ -15,7 +15,7 @@ from create_embed import embed
 from data_scrape.get_information import get_information
 from utils import delete_files
 
-TOKEN = 'OTI2OTAyOTA3MzEwMzIxNzU2.GWKn6K.yHOsE0Ga2wk6xsgM5q0l9Pm5IRufMXdIR7FcTc'
+TOKEN = os.getenv('DISCORD_TOKEN')
 
 client = discord.Client()
 
