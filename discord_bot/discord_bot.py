@@ -1,6 +1,7 @@
 # bot.py
 import sys
 import discord
+import os
 
 sys.path.append('../discord_bot')
 
