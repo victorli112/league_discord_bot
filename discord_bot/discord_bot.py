@@ -1,6 +1,5 @@
 # bot.py
 import sys
-import os
 import discord
 
 sys.path.append('../discord_bot')
@@ -14,8 +13,9 @@ from create_images.final_image import build_final_image
 from create_images.summoner_spells_image import create_summoner_spells_image
 from create_embed import embed
 from data_scrape.get_information import get_information
+from utils import delete_files
 
-TOKEN = os.getenv('DISCORD_TOKEN')
+TOKEN = 'OTI2OTAyOTA3MzEwMzIxNzU2.GWKn6K.yHOsE0Ga2wk6xsgM5q0l9Pm5IRufMXdIR7FcTc'
 
 client = discord.Client()
 
@@ -73,6 +73,11 @@ async def on_message(message):
             print(f"start: {datetime.now()}")
             await message.channel.send(embed = embedVar, file = file)
             print(f"end: {datetime.now()}")
+
+            # delete all the files
+            all_files = ['runes.png', 'summoners.png', 'starting_items.png', 'final_build.png', 'skill_priority.png', 'final_image.png']
+            delete_files(all_files)
+
         except Exception as err:
             await message.channel.send(f"u dum dum do champ name and role, {err}")
 
