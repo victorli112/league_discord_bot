@@ -13,7 +13,8 @@ def create_skill_priority_image(skills) -> Image:
     width = 0
     for skill_url in skills:
         response = requests.get(skill_url)
-        img = Image.open(BytesIO(response.content))
-        final_image.paste(img, (width, 0))
-        width += img.width
+        image = Image.open(BytesIO(response.content))
+        image = image.resize((64, 64))
+        final_image.paste(image, (width, 0))
+        width += image.width
     return final_image

@@ -15,8 +15,7 @@ from create_images.summoner_spells_image import create_summoner_spells_image
 from create_embed import embed
 from data_scrape.get_information import get_information
 
-#TOKEN = os.getenv('DISCORD_TOKEN')
-TOKEN = "OTI2OTAyOTA3MzEwMzIxNzU2.GWKn6K.yHOsE0Ga2wk6xsgM5q0l9Pm5IRufMXdIR7FcTc"
+TOKEN = os.getenv('DISCORD_TOKEN')
 
 client = discord.Client()
 
@@ -52,8 +51,8 @@ async def on_message(message):
             runes = create_rune_image(build.runes)
             runes.save('runes.png')
 
-            skill_priority = create_skill_priority_image(build.skill_priority)
-            skill_priority.save('skill_priority.png')
+            summoners = create_summoner_spells_image(build.summoners)
+            summoners.save("summoners.png")
 
             starting_items = create_starting_items_image(build.starting_items)
             starting_items.save("starting_items.png")
@@ -61,11 +60,11 @@ async def on_message(message):
             final_build = create_build_image(build.build)
             final_build.save("final_build.png")
 
-            summoners = create_summoner_spells_image(build.summoners)
-            summoners.save("summoners.png")
+            skill_priority = create_skill_priority_image(build.skill_priority)
+            skill_priority.save('skill_priority.png')
 
             # combine all the images into one
-            final_image = build_final_image(['runes.png', 'starting_items.png', 'final_build.png', 'summoners.png'])
+            final_image = build_final_image(['runes.png', 'summoners.png', 'starting_items.png', 'final_build.png', 'skill_priority.png'])
             final_image.save('final_image.png')
 
             file = discord.File("final_image.png", filename = "final_image.png")

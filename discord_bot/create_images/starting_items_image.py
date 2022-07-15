@@ -8,7 +8,7 @@ DESCRIPTION: Crops items from item sheet with Pillow, given positions. Combines 
 """
 
 def create_starting_items_image(image_info_list) -> Image:
-    final_image = Image.new('RGBA', (48 * 2, 48 * 1))
+    final_image = Image.new('RGBA', (64 * 2, 64 * 1))
     images = map(crop_image, image_info_list)
     width = 0
     for image in images:
