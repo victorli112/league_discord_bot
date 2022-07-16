@@ -36,10 +36,16 @@ async def on_message(message):
         try: 
             champion_and_role = command.split('8=D')[1].strip()
             champion_and_role = champion_and_role.split(" ")
+            words = len(champion_and_role)
+            champion_and_role = " ".join(champion_and_role)
+            if words >= 3:
+                champion_and_role = champion_and_role.rsplit(" ", 1)
+            else:
+                champion_and_role = [champion_and_role]
             champion = champion_and_role[0]
-            
-            # role might not be specified
+
             role = ""
+            # role might not be specified
             try:
                 role = champion_and_role[1]
                 build = get_information(champion, role)
