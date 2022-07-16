@@ -1,4 +1,5 @@
 import random
+import re
 import discord
 
 from utils import get_link
@@ -11,8 +12,12 @@ OUTPUT: Outputs a single embed for runes and summoner spells
 DESCRIPTION: Creates a discord embed for runes and summoner spells
 """
 def embed(champion_name, role, build):
-    championUpper = champion_name.capitalize()
+    championUpper = champion_name.title()
     roleUpper = role.capitalize()
+    print(role)
+
+    pattern = r'[^A-Za-z]+'
+    champion_name = re.sub(pattern, '', champion_name)
 
     embedVar = discord.Embed(
         title = championUpper + " " + roleUpper + " Build", 
