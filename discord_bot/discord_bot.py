@@ -16,8 +16,7 @@ from create_embed import embed
 from data_scrape.get_information import get_information
 from utils import delete_files
 
-# TOKEN = os.getenv('DISCORD_TOKEN')
-TOKEN = "OTI2OTAyOTA3MzEwMzIxNzU2.GWKn6K.yHOsE0Ga2wk6xsgM5q0l9Pm5IRufMXdIR7FcTc"
+TOKEN = os.getenv('DISCORD_TOKEN')
 
 client = discord.Client()
 
@@ -44,8 +43,8 @@ async def on_message(message):
             else:
                 champion_and_role = [champion_and_role]
             champion = champion_and_role[0]
+            
             role = ""
-            print(champion_and_role)
             # role might not be specified
             try:
                 role = champion_and_role[1]

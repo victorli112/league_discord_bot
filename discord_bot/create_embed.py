@@ -14,7 +14,6 @@ DESCRIPTION: Creates a discord embed for runes and summoner spells
 def embed(champion_name, role, build):
     championUpper = champion_name.title()
     roleUpper = role.capitalize()
-    print(role)
 
     pattern = r'[^A-Za-z]+'
     champion_name = re.sub(pattern, '', champion_name)
