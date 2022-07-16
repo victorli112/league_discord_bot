@@ -20,6 +20,6 @@ def embed(champion_name, role, build):
         url = get_link(champion_name, role),
         color = discord.Color.blue(),
     )
-    embedVar.set_thumbnail(url = f"https://static.u.gg/assets/lol/riot_static/12.12.1/img/champion/{championUpper}.webp")
+    embedVar.set_thumbnail(url = build.url)
     embedVar.add_field(name = "Skill Order", value = ''.join(build.skills), inline = "False")
     return embedVar
