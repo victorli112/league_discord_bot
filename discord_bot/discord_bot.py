@@ -34,7 +34,7 @@ async def on_message(message):
     # initial command
     if command.startswith('8=D'):
         try: 
-            champion_and_role = command.split('8=D')[1].strip() #kaisa adc, lee sin top, aurelion sol
+            champion_and_role = command.split('8=D')[1].strip()
             champion_and_role = champion_and_role.split(" ")
             words = len(champion_and_role)
             champion_and_role = " ".join(champion_and_role)
@@ -43,7 +43,7 @@ async def on_message(message):
             else:
                 champion_and_role = [champion_and_role]
             champion = champion_and_role[0]
-            
+
             role = ""
             # role might not be specified
             try:
