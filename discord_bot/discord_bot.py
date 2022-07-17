@@ -34,14 +34,19 @@ async def on_message(message):
     # initial command
     if command.startswith('8=D'):
         try: 
+            roles = ['top', 'jungle', 'mid', 'adc', 'support']
             champion_and_role = command.split('8=D')[1].strip()
             champion_and_role = champion_and_role.split(" ")
             words = len(champion_and_role)
             champion_and_role = " ".join(champion_and_role)
+            
             if words >= 3:
                 champion_and_role = champion_and_role.rsplit(" ", 1)
             else:
-                champion_and_role = [champion_and_role]
+                if any(role in champion_and_role for role in roles):
+                    champion_and_role = champion_and_role.split(" ")
+                else:
+                    champion_and_role = [champion_and_role]
             champion = champion_and_role[0]
 
             role = ""
