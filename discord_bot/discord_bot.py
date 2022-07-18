@@ -32,7 +32,7 @@ async def on_message(message):
 
     command = message.content 
     # initial command
-    if command.startswith('8=D'):
+    if command.startswith('8=D') or command.startswith('/cum'):
         try: 
             roles = ['top', 'jungle', 'mid', 'adc', 'support']
             champion_and_role = command.split('8=D')[1].strip()
