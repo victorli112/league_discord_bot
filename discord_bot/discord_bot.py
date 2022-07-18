@@ -36,7 +36,7 @@ async def on_message(message):
         try: 
             roles = ['top', 'jungle', 'mid', 'adc', 'support']
             if command.startswith('/cum'):
-                champion_and_role = command.split('/cum')[1].strip()\
+                champion_and_role = command.split('/cum')[1].strip()
             else:
                 champion_and_role = command.split('8=D')[1].strip()
             champion_and_role = champion_and_role.split(" ")
