@@ -20,7 +20,7 @@ def embed(champion_name, role, build):
 
     embedVar = discord.Embed(
         title = championUpper + " " + roleUpper + " Build", 
-        description = random.choice(POKEMON) + " whips out their huge throbbing cock, respectfully.",
+        description = random.choice(POKEMON) + " says hi, respectfully.",
         url = get_link(champion_name, role),
         color = discord.Color.blue(),
     )
