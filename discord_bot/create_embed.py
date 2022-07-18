@@ -18,8 +18,14 @@ def embed(champion_name, role, build):
     pattern = r'[^A-Za-z]+'
     champion_name = re.sub(pattern, '', champion_name)
 
+    # title formatting
+    if roleUpper == "":
+        title = championUpper + " Build"
+    else:
+        title = championUpper + " " + roleUpper + " Build" 
+
     embedVar = discord.Embed(
-        title = championUpper + " " + roleUpper + " Build", 
+        title = title,
         description = random.choice(POKEMON) + " says hi, respectfully.",
         url = get_link(champion_name, role),
         color = discord.Color.blue(),
