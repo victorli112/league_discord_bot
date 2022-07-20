@@ -34,7 +34,7 @@ async def on_message(message):
     # initial command
     if command.startswith('8=D') or command.startswith('/cum') or command.startswith('/build'):
         try: 
-            roles = ['top', 'jungle', 'mid', 'adc', 'support']
+            roles = ['top', 'jungle', 'mid', 'middle', 'adc', 'support']
             if command.startswith('/cum'):
                 champion_and_role = command.split('/cum')[1].strip()
             elif command.startswith('8=D'):
@@ -58,6 +58,8 @@ async def on_message(message):
             # role might not be specified
             try:
                 role = champion_and_role[1]
+                if role == 'mid':
+                    role = 'middle'
                 build = get_information(champion, role)
             except IndexError:
                 build = get_information(champion)
