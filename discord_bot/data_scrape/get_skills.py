@@ -1,6 +1,3 @@
-from bs4 import BeautifulSoup
-import requests
-
 """
 INPUT: the soup object containing all information about champion skills
 OUTPUT: a list of the recommended order of skills

@@ -1,4 +1,5 @@
-import requests
+import os
+from selenium import webdriver
 from bs4 import BeautifulSoup
 from utils import get_link
 
@@ -18,11 +19,17 @@ DESCRIPTION: return blocks of information for a champion in a role
           8 - fifth item options
           9 - sixth item options
 """
+
 def get_blocks(champion_name: str, role: str ="") -> list:
     URL = get_link(champion_name, role)
-
-    page = requests.get(URL)
-    soup = BeautifulSoup(page.content, "html.parser")
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    driver.get(URL)
+    soup = BeautifulSoup(driver.page_source, "html.parser")
     classes = [
         'champion-image',
         'content-section_content recommended-build_runes',
@@ -37,4 +44,4 @@ def get_blocks(champion_name: str, role: str ="") -> list:
     ]
 
     blocks = soup.find_all(True, {'class':classes})
-    return blocks[:10]
+    return blocks

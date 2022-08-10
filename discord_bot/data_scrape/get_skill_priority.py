@@ -1,5 +1,3 @@
-from bs4 import BeautifulSoup
-
 """
 INPUT: the soup object containing all information about skill priority
 OUTPUT: a list of skill image links in recommended order
