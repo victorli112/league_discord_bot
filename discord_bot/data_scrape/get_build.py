@@ -1,5 +1,3 @@
-from bs4 import BeautifulSoup
-
 """
 INPUT: Four soup objects containing all information about champion build
 OUTPUT: a list of dictionaries consisting of all the items that is recommended.
@@ -20,7 +18,10 @@ def contains_background_image(block):
 def convert_to_dict(element):
     element = str(element)
     sheet = element[element.find("https") : (element.find("webp") + 4)]
-    string_position = element[element.find("background-position:") + 20 : element.find("zoom") - 1].split(" ")
+    bg_pos = element.find("background-position")
+    pos_start = element.find(":", bg_pos) + 1
+    pos_end = element.find(";", bg_pos)
+    string_position = element[pos_start : pos_end].strip().split(" ")
     position = [abs(int(position[0:-2])) for position in string_position]
     return {"sheet": sheet, "position": position}
 
