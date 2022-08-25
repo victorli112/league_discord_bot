@@ -7,7 +7,7 @@ OUTPUT: URL of combined image of all the build items from the dict
 DESCRIPTION: Crops items from item sheet with Pillow, given positions. Combines cropped images.
 """
 
-def create_build_image(build_list: list[list]) -> Image:
+def create_build_image(build_list) -> Image:
     final_image = Image.new('RGBA', (64 * 6, 64 * 3))
     width = 0
     height = 0
