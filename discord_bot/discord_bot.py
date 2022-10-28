@@ -38,6 +38,7 @@ async def on_message(message):
             if command.startswith('/cum'):
                 if command.split('/cum')[1] == "in me":
                     await message.channel.send("Yes DADDY :FLUSH:")
+                    return
                 champion_and_role = command.split('/cum')[1].strip()
             elif command.startswith('8=D'):
                 champion_and_role = command.split('8=D')[1].strip()
