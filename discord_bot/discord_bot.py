@@ -36,7 +36,7 @@ async def on_message(message):
         try: 
             roles = ['top', 'jungle', 'mid', 'middle', 'adc', 'support']
             if command.startswith('/cum'):
-                if command.split('/cum')[1] == "in me":
+                if command.split(' ')[1].strip() == "in" and command.split(' ')[2].strip() == "me":
                     await message.channel.send("Yes DADDY :FLUSH:")
                     return
                 champion_and_role = command.split('/cum')[1].strip()
