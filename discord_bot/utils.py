@@ -15,7 +15,7 @@ class Utils:
         if role == "":
             return BUILD_LINK.format(champion_name=champion_name)
         elif role == "aram":
-            return ARAM_LINK.format(champion_name=champion_name)
+            return "https://u.gg/lol/champions/aram/{champion_name}-aram".format(champion_name=champion_name)
         else:
             return BUILD_AND_ROLE_LINK.format(champion_name=champion_name, role=role)
 
